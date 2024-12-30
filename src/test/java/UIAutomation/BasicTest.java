@@ -52,7 +52,7 @@ public class BasicTest {
 		helper.elementIsDisplayed(locatorManager.getLocator("employeeInfoText"), true, driver);
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void employeePage() {
 		FluentWait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(5))
 				.pollingEvery(Duration.ofMillis(500)).ignoring(ElementNotInteractableException.class);
@@ -62,7 +62,7 @@ public class BasicTest {
 		helper.verifyTextIsMatching((LoginPageLocators.addEmployeeText), "Add Employee", driver);
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	public void addEmployee() {
 		helper.enterText((LoginPageLocators.firstNameTextBox), "Atharv", driver);
 		helper.enterText((LoginPageLocators.middleNameTextBox), "middleName", driver);
@@ -71,7 +71,7 @@ public class BasicTest {
 		helper.wait(5);
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 4, enabled = true)
 	public void employeeIDList() {
 		helper.verifyListSize(50, (LoginPageLocators.employeeIDList), driver);
 	}
