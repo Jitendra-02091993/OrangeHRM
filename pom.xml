@@ -133,7 +133,7 @@
 				<version>${maven.surefire.version}</version>
 				<configuration>
 					<includes>
-						<include>**/*TestRunner.java</include>
+						<include>**/*testng.xml</include>
 					</includes>
 					<parallel>methods</parallel>
 					<threadCount>4</threadCount>

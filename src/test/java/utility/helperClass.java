@@ -34,7 +34,7 @@ public class helperClass {
 	int elementSize;
 	LocatorManager locatorManager = new LocatorManager(driver);
 	JavascriptExecutor js;
-	
+
 	public helperClass(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -59,14 +59,14 @@ public class helperClass {
 		Assert.assertEquals(status, true);
 		System.out.println("Clicked on element: " + eleFieldName);
 	}
-	
-	public void sendKeys(String eleFieldName,String text, WebDriver driver) {
+
+	public void sendKeys(String eleFieldName, String text, WebDriver driver) {
 		By element = locatorManager.getLocator(eleFieldName);
 		WebElement ele = driver.findElement(element);
 		ele.click();
 		ele.sendKeys(text);
 	}
-	
+
 	public void clickOnElementUsingJE(String eleFieldName, WebDriver driver) {
 		By by = locatorManager.getLocator(eleFieldName);
 		WebElement ele = driver.findElement(by);
@@ -74,7 +74,7 @@ public class helperClass {
 		js.executeScript("arguments[0].click();", ele);
 		System.out.println("Clicked on element: " + eleFieldName);
 	}
-	
+
 	public void clickOnDynamicElement(String elementFieldName, String replace, WebDriver driver) {
 		By by = getLocator(elementFieldName, replace);
 		WebElement ele = driver.findElement(by);
@@ -139,14 +139,14 @@ public class helperClass {
 			System.out.println("Failed to save screenshot: " + e.getMessage());
 		}
 	}
-	
+
 	public List<WebElement> getElements(By by, WebDriver driver) {
 		List<WebElement> ele = driver.findElements(by);
 		return ele;
 	}
 
 	public Integer getElementsNumber(By by, WebDriver driver) {
-		List<WebElement> ele = getElements(by,driver);
+		List<WebElement> ele = getElements(by, driver);
 		if (!ele.isEmpty()) {
 			elementSize = ele.size();
 			for (int i = 0; i < elementSize; i++) {
@@ -171,13 +171,13 @@ public class helperClass {
 	public void explicitlyWait(By by, int sec, WebDriver driver) {
 		WebElement ele = driver.findElement(by);
 		try {
-		Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
-		wait.until(ExpectedConditions.elementToBeClickable(by));
-		wait.until(d -> {
-			ele.isDisplayed();
-			return true;
-		});
-		}catch(Exception e) {
+			Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+			wait.until(ExpectedConditions.elementToBeClickable(by));
+			wait.until(d -> {
+				ele.isDisplayed();
+				return true;
+			});
+		} catch (Exception e) {
 			System.out.println("Error clicking element: " + e.getMessage());
 		}
 	}
@@ -197,9 +197,8 @@ public class helperClass {
 		Dimension dimension = new Dimension(width, height);
 		driver.manage().window().setSize(dimension);
 	}
-	
-	
-	public void selectFromDate(String fromDate,String eleFiledName,WebDriver driver) throws Exception {
+
+	public void selectFromDate(String fromDate, String eleFiledName, WebDriver driver) throws Exception {
 		Date formattedTargetDate;
 //		fromDate = 22-Sep-2024
 		Calendar calendar = Calendar.getInstance();
@@ -214,40 +213,37 @@ public class helperClass {
 //			clickOnElement("chevronRightButton", driver);
 			clickOnDynamicElement(eleFiledName, Integer.toString(targetDay), driver);
 			System.out.println("Clicked on element: " + eleFiledName);
-		}catch(ParseException e) {
+		} catch (ParseException e) {
 			throw new Exception("Invalid formate date");
 		}
 	}
-	
+
 	public By getLocator(String elementFieldName, String replace) {
-	    // Get the locator from LocatorManager
-	    By locator = locatorManager.getLocator(elementFieldName);
-	    
-	    // Check if the locator is null
-	    if (locator == null) {
-	        throw new IllegalArgumentException("Locator not found for: " + elementFieldName);
-	    }
+		// Get the locator from LocatorManager
+		By locator = locatorManager.getLocator(elementFieldName);
 
-	    // Assuming that 'locator' is an XPath or CSS selector, modify it
-	    String locatorString = locator.toString();
-	    
-	    // Extracting the actual XPath/CSS selector from By object
-	    String modifiedLocatorString = locatorString.replace("By.xpath: ", "").replace("replace", replace);
+		// Check if the locator is null
+		if (locator == null) {
+			throw new IllegalArgumentException("Locator not found for: " + elementFieldName);
+		}
 
-	    // Create a new By object based on modified string
-	    By finalElement = By.xpath(modifiedLocatorString); // Or use By.cssSelector(modifiedLocatorString) if it's CSS
+		// Assuming that 'locator' is an XPath or CSS selector, modify it
+		String locatorString = locator.toString();
 
-	    System.out.println(finalElement + "------------");
-	    return finalElement;
+		// Extracting the actual XPath/CSS selector from By object
+		String modifiedLocatorString = locatorString.replace("By.xpath: ", "").replace("replace", replace);
+
+		// Create a new By object based on modified string
+		By finalElement = By.xpath(modifiedLocatorString); // Or use By.cssSelector(modifiedLocatorString) if it's CSS
+		return finalElement;
 	}
-	
-	public void selectValuesFromDropDown(String eleFiledName,String value,WebDriver driver) {
+
+	public void selectValuesFromDropDown(String eleFiledName, String value, WebDriver driver) {
 		By by = locatorManager.getLocator(eleFiledName);
 		WebElement ele = driver.findElement(by);
-        // Create a Select object
-        Select dropdown = new Select(ele);
-        dropdown.selectByValue(value);
+		// Create a Select object
+		Select dropdown = new Select(ele);
+		dropdown.selectByValue(value);
 	}
-
 
 }

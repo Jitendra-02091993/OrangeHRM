@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test thread-count="5" name="Test">
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+<suite name="DEMOSuite" parallel="tests" thread-count = "3">
+	<test name="OrangeHRMDEMO">
+		<classes>
+			<class name="UIAutomation.BasicTest">
+				<methods>
+					<include name="launchURL" />
+					<include name="employeePage" />
+					<include name="addEmployee" />
+					<include name="employeeIDList" />
+					<include name="aboutPopUpBox" />
+					<include name="checkLeaveList" />
+					<include name="checkAssignLeave" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="jitu">
+		<groups>
+			<run>
+				<include name="smoke"/>
+			</run>
+		</groups>
+		<classes>
+			<class name="UIAutomation.handleAlert">
+				<methods>
+					<include name="handleAlertBox" />
+					<include name="handleConfirmAlertBox" />
+					<include name="handlePromptAlertBox" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite> <!--
+Suite -->

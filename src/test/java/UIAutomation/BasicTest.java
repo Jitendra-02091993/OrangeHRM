@@ -96,7 +96,7 @@ public class BasicTest {
 		helper.selectFromDate("30-Dec-2024", "selectDate", driver);
 	}
 	
-	@Test(priority = 7, enabled =true)
+	@Test(priority = 7, enabled =true, groups = {"smoke","regression"})
 	public void checkAssignLeave() throws Exception {
 		helper.clickOnElement("assignLeaveText", driver);
 		helper.clickOnElementUsingJE("searchEmployeeBox", driver);
@@ -126,5 +126,5 @@ public class BasicTest {
 			driver.quit();
 		}
 	}
-
+	
 }
